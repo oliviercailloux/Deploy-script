@@ -1,15 +1,9 @@
 #Maven release plugin has two problems. The message it creates for the git annotated tag can’t be changed (hence a bad release message on GitHub); and the prepare goal creates an unnecessary and improperly aligned <tag> element in the POM (related discussion at https://stackoverflow.com/questions/23718601/what-is-the-usage-of-maven-pom-xml-tag-element-inside-of-scm-when-you-are). 
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-#Thanks to https://unix.stackexchange.com/a/343653
-URL="$( python -c "import urllib;print urllib.quote(raw_input())" <<< "${DIR}" )"
-RULES_URL="file://${URL}/rules.xml"
-
 #Required for maven-javadoc-plugin
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 
-echo "Looking for dependency updates using ${RULES_URL}."
-mvn -Dmaven.version.rules=${RULES_URL} org.codehaus.mojo:versions-maven-plugin:2.8.1:display-dependency-updates
+mvn -Dmaven.version.rules=https://raw.githubusercontent.com/oliviercailloux/Deploy-script/master/rules.xml org.codehaus.mojo:versions-maven-plugin:2.8.1:display-dependency-updates
 if [[ "$?" -ne 0 ]] ; then
   echo "Could not verify dependencies."
   exit 1
