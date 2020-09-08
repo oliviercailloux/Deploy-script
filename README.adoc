@@ -1,0 +1,6 @@
+= Deploy script
+
+A bash script to deploy Maven releases. See https://github.com/oliviercailloux/java-course/blob/master/Maven/Maven%20central.adoc[doc] about deploying to Maven central.
+
+The script uses `xmllint` (under Debian, to be found within https://packages.debian.org/buster/libxml2-utils[libxml2-utils]).
+
